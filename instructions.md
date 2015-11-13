@@ -16,3 +16,4 @@ Para la app, contaremos con dos vistas:
  2. La segunda: en la que veremos el detalle de las tareas, además de que en ella podremos agregar nuevas tareas.
 
 ## Parte 2 - El ViewModel
+Esta es la parte “nueva”, como ya vimos, el el ViewModel es la capa intermedia 
