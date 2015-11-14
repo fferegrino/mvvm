@@ -12,12 +12,9 @@ namespace ToDo.Views
     {
         public TodoListPage()
         {
-            Content = new StackLayout
-            {
-                Children = {
-					new Label { Text = "Hello ContentPage" }
-				}
-            };
+			var listView = new ListView();
+
+			Content = listView;
         }
     }
 }
