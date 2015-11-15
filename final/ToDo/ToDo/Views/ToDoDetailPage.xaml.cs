@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace ToDo
+namespace ToDo.Views
 {
 	public partial class ToDoDetailPage : ContentPage
 	{
