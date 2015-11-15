@@ -43,9 +43,9 @@ namespace ToDo.Views
     {
         public TodoListPage()
         {
-					var listView = new ListView();
-		
-					Content = listView;
+            var listView = new ListView();
+            listView.ItemTemplate = new DataTemplate(typeof(TextCell));
+            Content = listView;
         }
     }
 }
@@ -77,5 +77,32 @@ Lo que queremos ver en esta vista es el detalle de la tarea. Será una interfaz 
 </ContentPage>
 ```
 
-## Parte 2 - El ViewModel
-Esta es la parte “nueva”, como ya vimos, el el ViewModel es la capa intermedia 
+### Parte 2.3 - Establecer una pantalla de inicio  
+Para establecer la pantalla desde la que vamos a iniciar, es necesario modificar el archivo `App.cs` y cambiar la propiedad `MainPage` pro la pantalla desde la que queremos que nuestra aplicación inice  
+
+#### Código  
+```
+            // The root page of your application
+            MainPage = new ToDoListPage();
+```
+
+## Parte 3 - El ViewModel
+Esta es la parte “nueva”, como ya vimos, el el ViewModel es la capa intermedia  
+
+## Parte 4 - Conexión View-VeiwModel  
+Una vez que tenemos el ViewModel, es necesario conectarlo de algún modeo en neustra vista, para eso usaremos el propiedad `BindingContext` de las páginas de Xamarin.Forms. En esta etapa, también estableceremos los *bindings* a las propiedades del *ViewModel*.
+
+### Parte 4.1 - Lista de tareas pendientes
+#### Código  
+Para establecer el contexto:
+```			
+			// ...
+            BindingContext = new ToDoViewModel();
+			// ...
+```
+Para establecer los *bindings*:
+```			
+			// ...
+            BindingContext = new ToDoViewModel();
+			// ...
+```
