@@ -18,7 +18,7 @@ namespace ToDo.Views
             listView.ItemTemplate = new DataTemplate(typeof(TextCell));
 
             // Binding para los items de la lista
-            BindingContext = new ToDoViewModel();
+            BindingContext = new ToDoListViewModel();
 
             // Bindings para definir la información que se muestra por cada fila
             listView.ItemTemplate.SetBinding(TextCell.TextProperty, "Name");
