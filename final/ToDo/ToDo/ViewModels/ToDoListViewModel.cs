@@ -9,6 +9,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using ToDo.Models;
+//
+using Xamarin.Forms;
+using ToDo.Abstractions;
 
 namespace ToDo.ViewModels
 {
@@ -38,6 +41,39 @@ namespace ToDo.ViewModels
             get { return _selectedToDoItem; }
             set { _selectedToDoItem = value; base.RaisePropertyChanged(); }
         }
+
+		private Command _saveToDosCommand;
+
+		public Command SaveToDosCommand 
+		{
+			get 
+			{
+				return _saveToDosCommand ?? 
+					( _saveToDosCommand = new Command(()=>{
+						var manager = new ToDoSaveManager();
+						List<ToDoItem> lista = ToDoItems.ToList();
+						manager.SetToDoItems(lista);
+					}));
+			}
+		}
+
+		private Command _loadToDosCommad;
+
+		public Command LoadToDosCommad {
+			get 
+			{
+				return _loadToDosCommad ?? 
+					( _loadToDosCommad = new Command(()=>{
+						var manager = new ToDoSaveManager();
+						var list = manager.GetToDoItems();
+						foreach(var item in list){
+							ToDoItems.Add(item);
+						}
+					}));
+			}
+			
+		}
+
 
     }
 }
