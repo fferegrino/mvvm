@@ -12,6 +12,7 @@ using ToDo.Models;
 //
 using Xamarin.Forms;
 using ToDo.Abstractions;
+using ToDo.Views;
 
 namespace ToDo.ViewModels
 {
@@ -20,59 +21,88 @@ namespace ToDo.ViewModels
 
         public ToDoListViewModel()
         {
-            ToDoItems.Add(new ToDoItem { Name = "Practice for presentation", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus magna ac quam imperdiet dignissim. In vulputate sapien vel nisl luctus, non rhoncus nunc rhoncus. Quisque cursus vulputate dolor vitae." });
-            ToDoItems.Add(new ToDoItem { Name = "Do present", Description = "Duis fringilla, est eu mollis pretium, sem dolor blandit quam, quis sollicitudin velit est eget libero. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." });
-            ToDoItems.Add(new ToDoItem { Name = "Go to Estadio Azteca", Description = "Nulla eros felis, mattis nec dolor dictum, cursus tincidunt ante." });
+            ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Practice for presentation", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus magna ac quam imperdiet dignissim." }));
+            ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Do present", Description = "Duis fringilla, est eu mollis pretium, sem dolor blandit quam, quis sollicitudin velit est eget libero." }));
+            ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Go to Estadio Azteca", Description = "Nulla eros felis, mattis nec dolor dictum, cursus tincidunt ante." }));
+            //SelectedToDoItem = ToDoItems.FirstOrDefault();
         }
 
 
-        private ObservableCollection<ToDoItem> _toDoItems;
+        private ObservableCollection<ToDoItemViewModel> _toDoItems;
 
-        public ObservableCollection<ToDoItem> ToDoItems
+        public ObservableCollection<ToDoItemViewModel> ToDoItems
         {
-            get { return _toDoItems ?? (_toDoItems = new ObservableCollection<ToDoItem>()); }
+            get { return _toDoItems ?? (_toDoItems = new ObservableCollection<ToDoItemViewModel>()); }
             set { _toDoItems = value; base.RaisePropertyChanged("ToDoItems"); }
         }
 
-        private ToDoItem _selectedToDoItem;
+        private ToDoItemViewModel _selectedToDoItem;
 
-        public ToDoItem SelectedToDoItem
+        public ToDoItemViewModel SelectedToDoItem
         {
             get { return _selectedToDoItem; }
-            set { _selectedToDoItem = value; base.RaisePropertyChanged(); }
+            set
+            {
+                _selectedToDoItem = value;
+
+                base.RaisePropertyChanged();
+            }
         }
 
-		private Command _saveToDosCommand;
+        private ToDoCommand _saveToDosCommand;
 
-		public Command SaveToDosCommand 
-		{
-			get 
-			{
-				return _saveToDosCommand ?? 
-					( _saveToDosCommand = new Command(()=>{
-						var manager = new ToDoSaveManager();
-						List<ToDoItem> lista = ToDoItems.ToList();
-						manager.SetToDoItems(lista);
-					}));
-			}
-		}
+        public ToDoCommand SaveToDosCommand
+        {
+            get
+            {
+                return _saveToDosCommand ??
+                    (_saveToDosCommand = new ToDoCommand(
+                        () =>
+                        {
+                            var manager = new ToDoSaveManager();
+                            List<ToDoItem> lista = ToDoItems.Select(vm => vm.Item).ToList();
+                            manager.SetToDoItems(lista);
+                        },
+                        () => true));
+            }
+        }
 
-		private Command _loadToDosCommad;
+        private ToDoCommand _loadToDosCommad;
 
-		public Command LoadToDosCommad {
-			get 
-			{
-				return _loadToDosCommad ?? 
-					( _loadToDosCommad = new Command(()=>{
-						var manager = new ToDoSaveManager();
-						var list = manager.GetToDoItems();
-						foreach(var item in list){
-							ToDoItems.Add(item);
-						}
-					}));
-			}
-			
-		}
+        public ToDoCommand LoadToDosCommad
+        {
+            get
+            {
+                return _loadToDosCommad ??
+                    (_loadToDosCommad = new ToDoCommand(
+                        () =>
+                        {
+                            var manager = new ToDoSaveManager();
+                            var list = manager.GetToDoItems();
+                            foreach (var item in list)
+                            {
+                                ToDoItems.Add(new ToDoItemViewModel(item));
+                            }
+                        },
+                        () => true));
+            }
+
+        }
+
+        private ToDoCommand _viewDetailCommand;
+
+        public ToDoCommand ViewDetailCommand
+        {
+            get
+            {
+                return _viewDetailCommand ?? (_viewDetailCommand = new ToDoCommand(
+                    () =>
+                    {
+                        App.Current.MainPage.Navigation.PushAsync(new ToDoDetailPage(SelectedToDoItem));
+                    },
+                    () => true));
+            }
+        }
 
 
     }

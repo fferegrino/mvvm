@@ -12,7 +12,7 @@ namespace ToDo
         public App()
         {
             // The root page of your application
-            MainPage = new ToDoListPage();
+            MainPage = new NavigationPage(new ToDoListPage());
         }
 
         protected override void OnStart()

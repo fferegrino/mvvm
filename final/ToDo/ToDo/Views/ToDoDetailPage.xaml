@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ToDo.Views.ToDoDetailPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="ToDo.Views.ToDoDetailPage"
+	Title="{Binding Name}">
 	<ContentPage.Content>
-		<StackLayout>
-			<Label FontSize="Large"></Label>
-			<Label FontSize="Small"></Label>
+		<StackLayout >
+			<Entry Text="{Binding Name, Mode=TwoWay}"> </Entry>
+			<Entry Text="{Binding Description, Mode=TwoWay}"></Entry>
 			<StackLayout Orientation="Horizontal">
 				<Label Text="Done"></Label>
-				<Switch></Switch>
+				<Switch IsToggled="{Binding IsDone, Mode=TwoWay}"></Switch>
 			</StackLayout>
 			<StackLayout Orientation="Horizontal">
 				<Label Text="¿Límite?"></Label>
-				<Switch></Switch>
+				<Switch  IsToggled="{Binding HasDueDate, Mode=TwoWay}"></Switch>
 			</StackLayout>
 			<DatePicker></DatePicker>
 		</StackLayout>

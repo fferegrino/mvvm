@@ -16,7 +16,12 @@ namespace ToDo.Views
 
 			var listView = new ListView();
             listView.ItemTemplate = new DataTemplate(typeof(TextCell));
-			listView.SetBinding (ListView.ItemsSourceProperty, "ToDoItems");
+            listView.SetBinding(ListView.ItemsSourceProperty, "ToDoItems");
+            listView.SetBinding(ListView.SelectedItemProperty, "SelectedToDoItem");
+            listView.ItemSelected += (s, a) =>
+            {
+                (BindingContext as ToDoListViewModel).ViewDetailCommand.Execute(null);
+            };
 
             // Binding para los items de la lista
             BindingContext = new ToDoListViewModel();
@@ -25,21 +30,20 @@ namespace ToDo.Views
             listView.ItemTemplate.SetBinding(TextCell.TextProperty, "Name");
 			listView.ItemTemplate.SetBinding(TextCell.DetailProperty, "Description");
 
-			var saveButton = new Button { Text = "Save" };
-			saveButton.SetBinding (Button.CommandProperty, "SaveToDosCommand");
+            var saveButton = new ToolbarItem { Text = "Save" };
+            saveButton.SetBinding(ToolbarItem.CommandProperty, "SaveToDosCommand");
 
-			var loadButton = new Button { Text = "Load" };
-			loadButton.SetBinding (Button.CommandProperty, "LoadToDosCommad");
+			var loadButton = new ToolbarItem { Text = "Load" };
+            loadButton.SetBinding(ToolbarItem.CommandProperty, "LoadToDosCommad");
 
 			Content = new StackLayout {
 				Children = {
-					saveButton,
-					loadButton,
 					listView
 				}
 			};
 
-
+            ToolbarItems.Add(saveButton);
+            ToolbarItems.Add(loadButton);
         }
     }
 }
