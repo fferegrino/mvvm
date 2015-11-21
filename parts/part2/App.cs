@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ToDo.Views;
 using Xamarin.Forms;
 

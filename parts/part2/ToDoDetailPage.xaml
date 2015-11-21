@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="ToDo.Views.ToDoDetailPage">
+	<ContentPage.Content>
+		<StackLayout >
+			<Entry> </Entry>
+			<Entry></Entry>
+			<StackLayout Orientation="Horizontal">
+				<Label Text="Done"></Label>
+				<Switch></Switch>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label Text="¿Límite?"></Label>
+				<Switch></Switch>
+			</StackLayout>
+			<DatePicker></DatePicker>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
