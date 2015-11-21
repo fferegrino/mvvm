@@ -89,6 +89,24 @@ namespace ToDo.ViewModels
 
         }
 
+		private ToDoCommand _addToDoCommad;
+
+		public ToDoCommand AddToDoCommad
+		{
+			get
+			{
+				return _addToDoCommad ?? (_addToDoCommad = new ToDoCommand(
+					() =>
+					{
+						var item= new ToDoItemViewModel(new ToDoItem { Name = "Edit me", Description = "Edit me" });
+						ToDoItems.Add(item);
+						SelectedToDoItem = item;
+						App.Current.MainPage.Navigation.PushAsync(new ToDoDetailPage(SelectedToDoItem));
+					},
+					() => true));
+			}
+		}
+
         private ToDoCommand _viewDetailCommand;
 
         public ToDoCommand ViewDetailCommand

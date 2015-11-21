@@ -31,10 +31,13 @@ namespace ToDo.Views
 			listView.ItemTemplate.SetBinding(TextCell.DetailProperty, "Description");
 
             var saveButton = new ToolbarItem { Text = "Save" };
-            saveButton.SetBinding(ToolbarItem.CommandProperty, "SaveToDosCommand");
+			saveButton.SetBinding(ToolbarItem.CommandProperty, "SaveToDosCommand");
 
 			var loadButton = new ToolbarItem { Text = "Load" };
-            loadButton.SetBinding(ToolbarItem.CommandProperty, "LoadToDosCommad");
+			loadButton.SetBinding(ToolbarItem.CommandProperty, "LoadToDosCommad");
+
+			var addButton = new ToolbarItem { Text = "Add" };
+			addButton.SetBinding(ToolbarItem.CommandProperty, "AddToDoCommad");
 
 			Content = new StackLayout {
 				Children = {
@@ -42,8 +45,9 @@ namespace ToDo.Views
 				}
 			};
 
-            ToolbarItems.Add(saveButton);
-            ToolbarItems.Add(loadButton);
+			ToolbarItems.Add(saveButton);
+			ToolbarItems.Add(loadButton);
+			ToolbarItems.Add(addButton);
         }
     }
 }
