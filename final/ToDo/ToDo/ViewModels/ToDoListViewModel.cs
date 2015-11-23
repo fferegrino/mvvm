@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Collections.ObjectModel;
-using ToDo.Abstractions;
-using ToDo.Views;
+﻿using System.Collections.ObjectModel;
 using ToDo.Models;
-//
-using Xamarin.Forms;
+using ToDo.Abstractions;
+using System.Collections.Generic;
+using System.Linq;
+using ToDo.Views;
 
 namespace ToDo.ViewModels
 {
@@ -26,8 +17,7 @@ namespace ToDo.ViewModels
             ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Do present", Description = "Duis fringilla, est eu mollis pretium, sem dolor blandit quam, quis sollicitudin velit est eget libero." }));
             ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Go to Estadio Azteca", Description = "Nulla eros felis, mattis nec dolor dictum, cursus tincidunt ante." }));
         }
-
-
+			
         private ObservableCollection<ToDoItemViewModel> _toDoItems;
 
         public ObservableCollection<ToDoItemViewModel> ToDoItems
@@ -41,12 +31,7 @@ namespace ToDo.ViewModels
         public ToDoItemViewModel SelectedToDoItem
         {
             get { return _selectedToDoItem; }
-            set
-            {
-                _selectedToDoItem = value;
-
-                base.RaisePropertyChanged();
-            }
+            set { _selectedToDoItem = value; base.RaisePropertyChanged(); }
         }
 
         private ToDoCommand _saveToDosCommand;
@@ -101,6 +86,7 @@ namespace ToDo.ViewModels
 						var item= new ToDoItemViewModel(new ToDoItem { Name = "Edit me", Description = "Edit me" });
 						ToDoItems.Add(item);
 						SelectedToDoItem = item;
+						// Xamarin.Forms reference. VIEWMODEL POLICE DEPARTMENT
 						App.Current.MainPage.Navigation.PushAsync(new ToDoDetailPage(SelectedToDoItem));
 					},
 					() => true));
@@ -116,12 +102,12 @@ namespace ToDo.ViewModels
                 return _viewDetailCommand ?? (_viewDetailCommand = new ToDoCommand(
                     () =>
                     {
+						// Xamarin.Forms reference. VIEWMODEL POLICE DEPARTMENT
                         App.Current.MainPage.Navigation.PushAsync(new ToDoDetailPage(SelectedToDoItem));
                     },
                     () => true));
             }
         }
-
 
     }
 }

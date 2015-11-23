@@ -1,4 +1,4 @@
-﻿using ToDo.ViewModels;
+using ToDo.ViewModels;
 using Xamarin.Forms;
 
 namespace ToDo.Views
