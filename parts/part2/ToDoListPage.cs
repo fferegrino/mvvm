@@ -15,8 +15,6 @@ namespace ToDo.Views
 
             var saveButton = new ToolbarItem { Text = "Save" };
 
-			var loadButton = new ToolbarItem { Text = "Load" };
-
 			var addButton = new ToolbarItem { Text = "Add" };
 
 			Content = new StackLayout {
@@ -26,7 +24,6 @@ namespace ToDo.Views
 			};
 
 			ToolbarItems.Add(saveButton);
-			ToolbarItems.Add(loadButton);
 			ToolbarItems.Add(addButton);
         }
     }
