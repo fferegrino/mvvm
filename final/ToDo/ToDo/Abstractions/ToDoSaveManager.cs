@@ -10,12 +10,14 @@ using Xamarin.Forms;
 namespace ToDo.Abstractions
 {
 
-	public class Helper {
-		public ToDoItem[] Items {
-			get;
-			set;
-		}
-	}
+    public class Helper
+    {
+        public ToDoItem[] Items
+        {
+            get;
+            set;
+        }
+    }
     public class ToDoSaveManager
     {
         IFileManager _fileManager;
@@ -28,16 +30,22 @@ namespace ToDo.Abstractions
         public List<ToDoItem> GetToDoItems()
         {
             string r = _fileManager.LoadText(file);
-			var obj = JsonConvert.DeserializeObject<Helper> (r);// as ToDoItem[];
-
-			return new List<ToDoItem>(obj.Items);
+            var obj = JsonConvert.DeserializeObject<Helper>(r);// as ToDoItem[];
+            if (obj != null)
+            {
+                return new List<ToDoItem>(obj.Items);
+            }
+            else
+            {
+                return new List<ToDoItem>();
+            }
         }
 
         public void SetToDoItems(List<ToDoItem> items)
         {
-			var array = items.ToArray ();
-			var heloer = new Helper { Items = items.ToArray () };
-			string r = JsonConvert.SerializeObject(heloer);
+            var array = items.ToArray();
+            var heloer = new Helper { Items = items.ToArray() };
+            string r = JsonConvert.SerializeObject(heloer);
             _fileManager.SaveText(file, r);
         }
     }

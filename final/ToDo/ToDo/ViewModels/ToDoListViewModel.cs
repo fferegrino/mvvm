@@ -13,9 +13,11 @@ namespace ToDo.ViewModels
         public ToDoListViewModel()
         {
 			// Sample items:
-            ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Practice for presentation", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus magna ac quam imperdiet dignissim." }));
-            ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Do present", Description = "Duis fringilla, est eu mollis pretium, sem dolor blandit quam, quis sollicitudin velit est eget libero." }));
-            ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Go to Estadio Azteca", Description = "Nulla eros felis, mattis nec dolor dictum, cursus tincidunt ante." }));
+            //ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Practice for presentation", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus magna ac quam imperdiet dignissim." }));
+            //ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Do present", Description = "Duis fringilla, est eu mollis pretium, sem dolor blandit quam, quis sollicitudin velit est eget libero." }));
+            //ToDoItems.Add(new ToDoItemViewModel(new ToDoItem { Name = "Go to Estadio Azteca", Description = "Nulla eros felis, mattis nec dolor dictum, cursus tincidunt ante." }));
+
+            LoadToDosCommad.Execute(null);
         }
 			
         private ObservableCollection<ToDoItemViewModel> _toDoItems;
