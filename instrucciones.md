@@ -129,4 +129,13 @@ public ToDoDetailPage (ToDoItemViewModel viewModel)
 ```
 
 #### Código  
-Archivos `ToDoDetailPage.xaml` y `ToDoDetailPage.xaml.cs`
+Archivos `ToDoDetailPage.xaml` y `ToDoDetailPage.xaml.cs`  
+
+## Parte 5 - Comandos  
+Es a través de los comandos como se dota de funcionalidad a nuestras aplicaciones en MVVM, los comandos son objetos de clases que implementan la interfaz ICommand. Puedes crear una clase que implemente la interfaz para cada comando o, como en nuestro caso, puedes usar una implementación genérica.  
+
+Crea una clase llamada `ToDoCommand` que implemente `ICommand`, la clase debe implementar los métodos....
+
+
+#### Código
+Archivo `ToDoCommand.cs`
